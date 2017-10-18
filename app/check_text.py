@@ -38,11 +38,11 @@ def check_all_errors(actual_resp, expected_resp, tool, model_mat, threshold):
     error = False
     text = ""
     if (avg_transition_prob(actual_resp, model_mat) < threshold):
-        text += "Message: The sentence is Gibberish. "
+        text += "Message: The sentence is Gibberish.\n"
         error = True
     # check for puntuation
     if len(actual_resp) > 0 and len(actual_resp.split()) > 1 and actual_resp[-1] not in string.punctuation:
-        text += "Message: The sentence is not properly punctuated. "
+        text += "Message: The sentence is not properly punctuated.\n"
         error = True
     matches = tool.check(actual_resp)
     if len(matches) > 0:
@@ -50,7 +50,7 @@ def check_all_errors(actual_resp, expected_resp, tool, model_mat, threshold):
             msg = bytes(m.msg, 'utf-8').decode('utf-8', 'ignore')
             if msg == "This sentence does not start with an uppercase letter" and expected_resp[0].islower():
                 continue
-            text += "Message: " + msg + " "
+            text += "Message: " + msg + "\n"
             error = True
     if not error:
         text = "NO ERRORS!!"

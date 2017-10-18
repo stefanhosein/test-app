@@ -16,11 +16,11 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         msg = check_all_errors(form.response.data, form.exp_response.data, tool, model_data['mat'], model_data['thresh'])
-        # msg_test = " ".join(msg)
+        # msg = "<br>".join(msg.split("\n"))
         flash('Response Given: "%s"' % (form.response.data))
-        flash('Expected Response: "%s"' % msg)
+        flash("%s" % msg)
         # flash('Message(s): "%s"' % )
         return redirect('/')
-    return render_template('login.html',
+    return render_template('index.html',
                            title='Stefan\'s App',
                            form=form)

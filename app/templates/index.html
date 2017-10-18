@@ -1,9 +1,21 @@
+<!-- extend base layout -->
 {% extends "base.html" %}
+
 {% block content %}
-    <h1>Hi, {{ user.nickname }}!</h1>
-    {% for post in posts %}
-    <p>
-      {{ post.author.nickname }} says: <b>{{ post.body }}</b>
-    </p>
-    {% endfor %}
+  <h1>Sign In</h1>
+  <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <p>
+          Please enter your text:<br>
+          {{ form.response(size=100) }}<br>
+          {% for error in form.response.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+          {{ form.exp_response(size=100) }}<br>
+          {% for error in form.exp_response.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+      </p>
+      <p><input type="submit" value="Sign In"></p>
+  </form>
 {% endblock %}
